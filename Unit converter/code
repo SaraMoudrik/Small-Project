@@ -1,1 +1,11 @@
+distance = float(input("Entrez une distance en (m) "))
+unite = input("Entrez l'unité (mm, cm ou km) ")
+
+taux = {"km" : 0.01, "cm" : 100, "mm" : 1000}
+
+if unite in taux:
+    resultat = distance*taux[unite]
+    print(f"Conversion : {distance} m = {resultat} {unite}")
+else:
+    print("Unité Invalide")
 
