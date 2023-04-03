@@ -20,9 +20,10 @@ class rectangle:
         else:
             carre = False
             self.carre = carre
-    
 
-rect = rectangle(6, 5)
+n = int(input("Enter the lenth: "))
+x = int(input("Enter the width: "))
+rect = rectangle(n, x)
 rect.rect_perimetre()
 rect.rect_aire()
 rect.carres()
