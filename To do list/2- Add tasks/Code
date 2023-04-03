@@ -1,0 +1,17 @@
+class Taches:
+    def __init__(self):
+        self.taches = []
+        self.termine = []
+
+    def ajouter(self, tache):
+        self.taches.append(tache)
+        self.termine.append(False)
+   
+
+taches = Taches()
+taches.ajouter("gym")
+taches.ajouter("course")
+taches.ajouter("lire")
+
+print(taches.taches)
+print(taches.termine)
