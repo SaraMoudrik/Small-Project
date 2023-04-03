@@ -1,0 +1,31 @@
+class rectangle:
+    def __init__(self, lenth, width):
+        self.lenth = lenth
+        self.width = width
+
+    def rect_perimetre(self):
+        perimetre = (self.lenth + self.width)*2
+        self.perimetre = perimetre
+        return self.perimetre
+
+    def rect_aire(self):
+        aire = (self.lenth*self.width)
+        self.aire = aire
+        return self.aire
+
+    def carres(self):
+        if self.lenth == self.width :
+            carre = True
+            self.carre = carre
+        else:
+            carre = False
+            self.carre = carre
+    
+
+rect = rectangle(6, 5)
+rect.rect_perimetre()
+rect.rect_aire()
+rect.carres()
+print(f"Perimeter: {rect.perimetre}m")
+print(f"Area: {rect.aire}m^2")
+print(f"Is it a square? {rect.carre}")
