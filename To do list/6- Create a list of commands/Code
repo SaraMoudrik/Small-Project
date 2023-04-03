@@ -1,0 +1,60 @@
+class Taches:
+    def __init__(self):
+        self.taches = []
+        self.termine = []
+
+    def ajouter(self, tache):
+        self.taches.append(tache)
+        self.termine.append(False)
+
+    def idx_valid(self, idx):
+        if idx >= 0 and idx < len(self.termine):
+            return True
+        
+        else: 
+            print("Erreur: Indice hors limite ")
+            return False
+
+    def terminer(self,idx):
+        if self.idx_valid(idx):
+            self.termine[idx] = True
+
+    def supprimer(self,idx):
+        if self.idx_valid(idx):
+            del self.taches[idx]
+            del self.termine[idx]
+
+    def afficher(self):
+        print("-----------------")
+        for i, t in enumerate(self.taches):
+            print(f"{i} : {t} - {self.termine[i]}")
+
+    def quitter(self):
+        if True:
+            print("Fin")
+        
+
+taches = Taches()
+
+taches.ajouter("gym")
+taches.ajouter("course")
+taches.ajouter("lire")
+
+while True:
+    choix = input("entrez une commande(+: Ajouter, -: Terminer, s: Supprimer, a: Afficher, q: Quitter) " )
+
+    if choix == "a":
+        taches.afficher()
+    elif choix == "+":
+        todo = input("Entrez une tache ")
+        taches.ajouter(todo)
+    elif choix == "-":
+        idx = int(input("Entrez l'Id de la tache "))
+        taches.terminer(idx)
+    elif choix == "s":
+        supp = int(input("Entrez une tache "))
+        taches.supprimer(supp)
+    elif choix =="q":
+        break
+
+    taches.afficher()
