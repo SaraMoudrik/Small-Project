@@ -1,0 +1,26 @@
+import random
+
+while True:
+    option = ["rock", "paper", "scissors"]
+    sel_rand = random.choice(option)
+
+    choix = input("Enter your choice from: rock, paper ou scissors ")
+
+    if choix in option:
+        if choix == sel_rand:
+            print("Draw")
+        elif choix == "paper" and sel_rand == "rock":
+            print("Well done, you won")
+        elif choix == "scissors" and sel_rand == "paper":
+            print("Well done, you won")
+        elif choix == "rock" and sel_rand == "scissors":
+            print("Well done, you won")
+        else:
+            print("You lost")
+        print("Computer choice :", sel_rand)
+
+    else:
+        print("Choix incorrect")
+    encore = input("Play again? Yes or no ")
+    if encore == "no":
+        break
