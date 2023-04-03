@@ -1,1 +1,9 @@
-vggv
+class Taches:
+    def __init__(self):
+        self.taches = []
+        self.termine = []
+
+tache = Taches()
+
+print(tache.taches)
+print(tache.termine)
