@@ -1,0 +1,37 @@
+class Form:
+    def __init__(self, name):
+        self.name = name
+
+    def aire(self):
+        print("Calculate area")
+    
+    def info(self):
+        print(f"Classe {self.name}")
+
+class Rectangle(Form):
+    def __init__(self, lenth, width):
+        super().__init__("Rectangle")
+        self.lenth = lenth
+        self.width = width
+
+    def area(self):
+        print("Area:", self.lenth*self.width)
+
+class Cercle(Form): 
+    def __init__(self, radius):
+        super().__init__("Cercle")
+        self.radius = radius
+
+    def area(self):
+        print("Area:", 3.14*self.radius**2)
+
+x = int(input("Enter a lenth "))
+y = int(input("Enter a width "))
+rect = Rectangle(x,y)
+print(rect.name)
+rect.area()
+
+r = int(input("Enter a radius "))
+cercle = Cercle(r)
+print(cercle.name)
+cercle.area()
