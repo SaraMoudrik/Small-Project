@@ -1,0 +1,11 @@
+if __name__ == '__main__':
+    n = int(input())
+    arr = list(map(int, input().split()))
+    
+if 2 <= n <= 10 and all(-100 <= i <= 100 for i in arr):
+    arr = set(arr)
+    arr = sorted(arr, reverse=True)
+    print(arr[1])
+
+else:
+    print("erreur")
