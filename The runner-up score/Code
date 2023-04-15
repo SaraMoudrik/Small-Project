@@ -1,0 +1,20 @@
+my_dict = {}
+unique_scores = set()
+if __name__ == '__main__':
+    for n in range(2,6) and range(int(input())):
+        name = input()
+        score = float(input())
+        my_dict[name] = score
+        unique_scores.add(score)
+
+unique_scores= sorted(unique_scores)
+nd_lowest = unique_scores[1]
+
+names_2ndlowest = [name for name, score in my_dict.items() if score == nd_lowest]
+sorted_names = sorted(names_2ndlowest)
+        
+if len(sorted_names) > 1:
+    for name in sorted_names:
+        print(name)
+else:
+    print(sorted_names[0])
