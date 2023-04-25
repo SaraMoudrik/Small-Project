@@ -1,0 +1,47 @@
+class Purchases:
+    def __init__(self):
+        self.purchases = []
+        self.prices = []
+
+    def add(self, purchase, price):
+        self.purchases.append(purchase)
+        self.prices.append(price)
+
+    def display(self):
+        print("---------------")
+        for i in range(len(self.purchases)):
+            print(f"{i} : {self.purchases[i]} - {self.prices[i]} euros")
+
+    def delete(self, purchase):
+        if purchase in self.purchases:
+            self.purchases.remove(purchase)
+        else:
+            print("Value invalid")
+
+    def total(self):
+        print(f"Total price: {sum(self.prices)} euros")
+
+purchases = Purchases()
+
+purchases.add("banana" , 4.5)
+purchases.add("oat" , 1.2)
+purchases.add("milk" , 1.5)
+
+while True:
+    choice = input("commands (+: Add, -: Delete, t: Display the total price, d: Display, q: Leave)")
+    
+    if choice == "d":
+        purchases.display()
+    elif choice == "t":
+        purchases.total()
+    elif choice == "-":
+        del_product = input("Enter the product: ")
+        purchases.delete(del_product)
+    elif choice == "+":
+        add_product = input("Enter the product: ")
+        add_price = float(input("Enter the product price: "))
+        purchases.add(add_product, add_price)
+    elif choice == "q":
+        break
+    else:
+        print("Invalid command")
