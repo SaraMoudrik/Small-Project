@@ -1,1 +1,1 @@
-
+This code collects the content of a text file named 'file.txt', calculates and organizes the frequency of words in the file, excluding common language words. The results are then saved in a JSON file.
