@@ -1,19 +1,1 @@
-import json
 
-with open('file.txt', 'r', encoding='utf-8') as f:
-    text = f.read()
-    words = text.split()
-    word_count = {}
-    not_exc = ['is', 'for', 'its', 'and', 'are', 'to', 'with', 'the', 'of', 'that']
-
-    for word in words:
-        if word not in not_exc:
-            if word in word_count:
-                word_count[word] += 1
-            else:
-                word_count[word] = 1
-
-    sorted_count = dict(sorted(word_count.items(), key=lambda x: x[1], reverse=True))
-
-    with open('word_cloud.json', 'w') as fw:
-        json.dump(sorted_count , fw, indent =4)
