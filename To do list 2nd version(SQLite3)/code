@@ -1,1 +1,86 @@
+import sqlite3
 
+def cross(text):
+    return ''.join([u'\u0336{}'.format(c)for c in text])
+
+class Todo:
+    def __init__(self):
+        self.filename = "tasks.db"
+        self.connect_file()
+
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS table_of_tasks
+                            (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            task TEXT, status INTEGER)''')
+    
+        self.disc_file()
+
+    def connect_file(self):
+        self.connexion = sqlite3.connect(self.filename)
+        self.cursor = self.connexion.cursor()
+
+    def disc_file(self):
+        self.connexion.close()
+
+    def add(self, task, status = False):
+        request = f"INSERT INTO table_of_tasks (task, status) VALUES ('{task}', {int(status)})"
+        self.cursor.execute(request)
+        self.connexion.commit()
+
+    def display(self):
+        request = "SELECT * FROM table_of_tasks"
+        tasks_displayer = self.cursor.execute(request).fetchall()
+        print("----------------------------")
+        for i in tasks_displayer:
+            if i[2]:
+                print(f"{i[0]} - {cross(i[1])}")
+            else:
+                print(f"{i[0]} - {i[1]}")
+    
+    def existance(self, task):
+        request = f"SELECT * FROM table_of_tasks WHERE task = '{task}' "
+        result = self.cursor.execute(request).fetchone()
+        return True if result else False
+    
+    def done(self, task):
+        if self.existance(task):
+            request = f"UPDATE table_of_tasks SET status = 1 WHERE task = '{task}'"
+            self.cursor.execute(request)
+            self.connexion.commit()
+            print(f"{task} done")
+        else:
+            print("This task does not exist")
+    
+    def delete(self, task):
+        if self.existance(task):
+            request = f"DELETE FROM table_of_tasks WHERE task = '{task}' "
+            self.cursor.execute(request)
+            self.connexion.commit()
+            print(f"{task} has been deleted")
+        else:
+            print("This task does not exist")
+
+
+tasks = Todo()
+try:
+    tasks.connect_file()
+    while True:
+        choice = input("entre one of the commandes(+: Add, -: Finish, s: Delete, a: Display, q: Exit) " )
+
+        if choice == 'a':
+            tasks.display()
+        elif choice == '+':
+            addition = input("Enter a task ")
+            tasks.add(addition)
+        elif choice =='-':
+            finishing = input("Enter a task ")
+            tasks.done(finishing)
+        elif choice == 's':
+            deleting = input("Enter a task ")
+            tasks.delete(deleting)
+        elif choice == 'q':
+            break
+
+except Exception as e:
+    print("Error:", e)
+finally:
+    tasks.disc_file()
