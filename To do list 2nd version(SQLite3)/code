@@ -37,34 +37,34 @@ class Todo:
                 print(f"{i[0]} - {i[1]}")
     
     def existance(self, task):
-        request = f"SELECT * FROM table_of_tasks WHERE task = '{task}' "
-        result = self.cursor.execute(request).fetchone()
-        return True if result else False
-    
+        request = "SELECT * FROM table_of_tasks WHERE task = ?"
+        result = self.cursor.execute(request, (task,)).fetchone()
+        if result:
+            print("This task already exists in the database")
+        else:
+            print("This task is not in the database")
+            
     def done(self, task):
-        if self.existance(task):
+        try:
             request = f"UPDATE table_of_tasks SET status = 1 WHERE task = '{task}'"
             self.cursor.execute(request)
             self.connexion.commit()
-            print(f"{task} done")
-        else:
-            print("This task does not exist")
+            print(f"this task '{task}' is completed")
+        except Exception as e:
+            print("Error:", e)
     
     def delete(self, task):
-        if self.existance(task):
-            request = f"DELETE FROM table_of_tasks WHERE task = '{task}' "
-            self.cursor.execute(request)
-            self.connexion.commit()
-            print(f"{task} has been deleted")
-        else:
-            print("This task does not exist")
+        request = f"DELETE FROM table_of_tasks WHERE task = '{task}' "
+        self.cursor.execute(request)
+        self.connexion.commit()
+            
 
 
 tasks = Todo()
 try:
     tasks.connect_file()
     while True:
-        choice = input("entre one of the commandes(+: Add, -: Finish, s: Delete, a: Display, q: Exit) " )
+        choice = input("entre one of the commandes(+: Add, -: Finish, s: Delete, a: Display, e: Checking the existance, q: Exit) " )
 
         if choice == 'a':
             tasks.display()
@@ -77,6 +77,9 @@ try:
         elif choice == 's':
             deleting = input("Enter a task ")
             tasks.delete(deleting)
+        elif choice == 'e':
+            checking = input("Enter a task ")
+            tasks.existance(checking)
         elif choice == 'q':
             break
 
